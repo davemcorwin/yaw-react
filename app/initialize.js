@@ -25,7 +25,7 @@ const load = () => {
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App}>
-
+          <Route path="/dashboard" component={() => <h1>Hi</h1>}/>
         </Route>
       </Router>
     </Provider>,

@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+  flex-flow: column;
+  height:100%;
+  margin:0;
+}
+
+.wrapper > * {
+  padding: 10px;
+}
+
+.content{
+  flex: 2;
+}
