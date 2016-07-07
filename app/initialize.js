@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-import * as models from './models'
 import { modelsToReducers } from './lib/model'
+import * as models from './models'
 
 import App from './components/App'
 
