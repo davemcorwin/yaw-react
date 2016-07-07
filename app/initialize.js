@@ -1,35 +1,40 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import counterApp from './reducers';
-import App from 'components/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-const store = createStore(counterApp, module.hot && module.hot.data && module.hot.data.counter || 0);
+import * as models from './models'
+import { modelsToReducers } from './lib/model'
 
-if (module.hot) {
-  module.hot.accept('./reducers', () => {
-    store.replaceReducer(require('./reducers').default);
-  });
-  module.hot.accept();
+import App from './components/App'
 
-  module.hot.dispose((data) => {
-    data.counter = store.getState();
-    [].slice.apply(document.querySelector('#app').children).forEach(function(c) { c.remove() });
-  });
-}
+const store = createStore(
+  combineReducers({
+    ...modelsToReducers(models),
+    routing: routerReducer
+  }),
+  applyMiddleware(routerMiddleware(browserHistory))
+)
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 const load = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Router history={history}>
+        <Route path="/" component={App}>
+
+        </Route>
+      </Router>
     </Provider>,
-    document.querySelector('#app')
-  );
-};
+    document.getElementById('app')
+  )
+}
 
 if (document.readyState !== 'complete') {
-  document.addEventListener('DOMContentLoaded', load);
+  document.addEventListener('DOMContentLoaded', load)
 } else {
-  load();
+  load()
 }

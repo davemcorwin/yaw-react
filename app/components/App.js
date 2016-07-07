@@ -1,12 +1,11 @@
-import React from 'react';
-import Counter from './Counter';
+import React from 'react'
+import { connect } from '../utils'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <div id="content">
-        <h1>&nbsp;</h1>
-        <Counter />
+        <h1>&nbsp</h1>
         <h2>Welcome!</h2>
         <ul>
           <li><a href="http://brunch.io/">Brunch</a></li>
@@ -14,6 +13,8 @@ export default class App extends React.Component {
           <li><a href="http://redux.js.org">Redux</a></li>
         </ul>
       </div>
-    );
+    )
   }
 }
+
+export default connect(App)

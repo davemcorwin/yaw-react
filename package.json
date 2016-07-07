@@ -17,7 +17,10 @@
     "react": "~0.14.7",
     "react-dom": "~0.14.7",
     "react-redux": "~4.3.0",
-    "redux": "~3.2.1"
+    "react-router": "^2.5.2",
+    "react-router-redux": "^4.0.5",
+    "redux": "~3.2.1",
+    "redux-actions": "^0.10.0"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.7.0",
@@ -29,7 +32,6 @@
     "brunch": "^2.7.0",
     "clean-css-brunch": "^2.0.0",
     "css-brunch": "^2.0.0",
-    "hmr-brunch": "^0.1.0",
     "javascript-brunch": "^2.0.0",
     "postcss-brunch": "^0.5.0",
     "sass-brunch": "^2.6.3",
