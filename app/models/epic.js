@@ -41,6 +41,6 @@ export default model({
     )
   },
   selectors: {
-    byProject: (state, projectId) => _.filter(state.epics, { project: projectId })
+    byProject: (state, projectId) => _.chain(state.epics).filter({ project: projectId }).sortBy('id').value()
   }
 })

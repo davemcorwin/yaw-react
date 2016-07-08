@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from '../utils'
-import Layout from './AppLayout'
+import AppLayout from './AppLayout'
 
 class App extends React.Component {
   render() {
     return (
-      <Layout {...this.props}>
+      <AppLayout {...this.props}>
         {this.props.children}
-      </Layout>
+      </AppLayout>
     )
   }
 }

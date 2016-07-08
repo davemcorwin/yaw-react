@@ -23,6 +23,7 @@ export default model({
     ],
   },
   selectors: {
-    all: state => state.projects
+    all: state => state.projects,
+    bySlug: (state, slug) => _.find(state.projects, { slug })
   }
 })

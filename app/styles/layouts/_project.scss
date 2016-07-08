@@ -1,0 +1,81 @@
+.project-view{
+
+  .project-header{
+    margin-bottom: 1rem;
+  }
+
+  height: 98%;
+
+  .project-container{
+    display: flex;
+    flex-flow: row nowrap;
+    height: 90%;
+
+    aside{
+      flex-basis: 15rem;
+
+      display: flex;
+      flex-flow: column nowrap;
+
+      .filler{
+        flex: 2;
+        border-right: 1px solid $border-color;
+      }
+
+      a{
+        flex-basis: 4rem;
+        cursor: pointer;
+        color: $primary-color;
+        padding: 1rem;
+        font-weight: 500;
+        border-right: 1px solid $border-color;
+        background-color: $drawer-background-color;
+
+        &.active{
+          background-color: $background-color;
+          border: 1px solid $border-color;
+          border-right: none;
+        }
+
+        &:hover{
+          // color: $primary-color-light;
+        }
+      }
+    }
+
+    main{
+      flex: 2;
+      padding: 1rem;
+      background-color: $background-color;
+      overflow: scroll;
+      border: 1px solid $border-color;
+      border-left: none;
+    }
+  }
+}
+//
+// .scoping-view{
+//   display: flex;
+//   flex-flow: row nowrap;
+//
+//   .epic-list-container{
+//     flex-basis: 20rem;
+//
+//     a{
+//       display: block;
+//
+//       &.active{
+//         text-decoration: underline;
+//         // background-color: $background-color;
+//       }
+//     }
+//   }
+//
+//   .epic-detail-container{
+//     flex: 2;
+//     // margin-top: 6rem;
+//     padding: 1rem;
+//     background-color: $drawer-background-color;
+//     border: 1px solid $border-color;
+//   }
+// }

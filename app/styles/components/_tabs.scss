@@ -1,0 +1,41 @@
+.tab-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-flow: column nowrap;
+
+  .tab-row{
+    flex-basis: 5rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+
+    .tab-link{
+      flex: 1;
+
+      text-align: center;
+      padding-top: 1rem;
+
+      border-bottom: 2px solid $border-color;
+
+      &.active{
+        background-color: lighten($background-color, 3%);
+        border-bottom: none;
+        border-left: 1px solid $border-color;
+        border-top: 1px solid $border-color;
+        border-right: 1px solid $border-color;
+      }
+    }
+  }
+
+  .tab-content{
+    flex: 2;
+
+    background-color: lighten($background-color, 3%);
+    padding: 1rem;
+    border-left: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+  }
+}

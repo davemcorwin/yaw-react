@@ -86,5 +86,8 @@ export default model({
       ...state,
       features: _.reject(state.features, { id: id })
     })
+  },
+  selectors: {
+    byEpic: (state, epicId) => _.chain(state.features).filter({ epic: epicId }).sortBy('id').value()
   }
 })

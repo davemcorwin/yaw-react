@@ -3,10 +3,13 @@ import model from '../lib/model'
 export default model({
   namespace: 'ui',
   state: {
-    showSidenav: false
+    showSideDrawer: false
   },
   reducers: {
-    hideSidenav: state => ({ ...state, showSidenav: false }),
-    showSidenav: state => ({ ...state, showSidenav: true })
+    hideSideDrawer: state => ({ ...state, showSideDrawer: false }),
+    showSideDrawer: state => ({ ...state, showSideDrawer: true })
+  },
+  selectors: {
+    showSideDrawer: state => state.showSideDrawer
   }
 })

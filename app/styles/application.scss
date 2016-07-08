@@ -24,7 +24,9 @@
 @import "base/base";
 
 @import "layouts/app";
+@import "layouts/project";
 
 @import "components/nav";
 @import "components/footer";
-@import "components/sidenav";
+@import "components/side-drawer";
+@import "components/tabs";

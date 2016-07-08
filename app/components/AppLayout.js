@@ -1,38 +1,34 @@
 import React from 'react'
+import { Link } from 'react-router'
 import _ from 'lodash'
-import classnames from 'classnames'
+
+import SideDrawer from './SideDrawer'
 
 export default ({children, select, send, ...props}) => {
 
-  const hideSidenav = () => send('ui:hideSidenav')
-  const showSidenav = () => send('ui:showSidenav')
-  const projects = select('project:all')
-  const isShowSidenav = select('ui:showSidenav')//state.ui.showSidenav
+  const showSideDrawer = e => { e.preventDefault(); send('ui:showSideDrawer'); }
 
   return (
-    <div>
+    <div style={{height: '100%'}}>
 
-      <div className={classnames('sidenav', {active: isShowSidenav})}>
-        <a href="#" className="closebtn" onclick={hideSidenav}>X</a>
-        {_.map(projects, prj => `<a href="/projects/{prj.slug}">{prj.name}</a>`)}
-      </div>
+      <SideDrawer {...{select, send}} />
 
       <div className="wrapper">
 
         <nav role="banner">
           <div className="nav-item left">
-            <a href="#" className="nav-link" onclick={showSidenav}>Projects</a>
-            <a href="#" className="nav-link">+</a>
+            <Link to="#" className="nav-link" onClick={showSideDrawer}>Projects</Link>
+            <Link to="#" className="nav-link">+</Link>
           </div>
           <div className="nav-item">
-            <a href="/" className="nav-link">Yaw</a>
+            <Link to="/" className="nav-link">Yaw</Link>
           </div>
           <div className="nav-item right">
           </div>
         </nav>
 
         <div className="content">
-          {/*{React.cloneElement(React.Children.only(children), {select, send, ...props})}*/}
+          {React.cloneElement(React.Children.only(children), {select, send, ...props})}
         </div>
 
         <footer>
