@@ -7,4 +7,8 @@ html, body, #app{
 
 a {
   color: $font-color;
+
+  &:hover{
+    color: lighten($font-color, 10%);
+  }
 }

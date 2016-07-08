@@ -26,16 +26,17 @@ export default ({ select, send, ...props}) => {
         )}
       </div>
 
-      <div className="tab-content">
-        {_.map(stageProjects, projectCard)}
+      <div className="tab-content flex-grid">
+        {_.map(stageProjects, project =>
+          <Link
+            key={project.slug}
+            className="card project-card"
+            to={`/projects/${project.slug}/${stage}`}>
+
+            <h3>{project.name}</h3>
+          </Link>
+        )}
       </div>
     </div>
   )
 }
-
-const projectCard = project =>
-  <div key={project.slug} className="card project-card">
-    <Link to={`/projects/${project.slug}`}>
-      <h3>{project.name}</h3>
-    </Link>
-  </div>

@@ -30,12 +30,7 @@ nav{
   }
 
   .nav-link{
-    color: $inverse-primary-color;
     font-size: 20px;
     font-weight: 500;
-
-    &:hover{
-      color: $inverse-primary-color-dark;
-    }
   }
 }
