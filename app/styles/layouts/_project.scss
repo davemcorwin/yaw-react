@@ -1,15 +1,20 @@
 .project-view{
+  display: flex;
+  flex-flow: column nowrap;
+
+  height: 100%;
 
   .project-header{
     margin-bottom: 1rem;
+    flex-basis: 2rem;
   }
 
-  height: 98%;
-
   .project-container{
+    flex: 2;
+
     display: flex;
     flex-flow: row nowrap;
-    height: 90%;
+    height: 100%;
 
     aside{
       flex-basis: 15rem;

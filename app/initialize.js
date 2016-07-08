@@ -30,7 +30,7 @@ const load = () => {
   ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
-        <Route component={App}>
+        <Route path="/" component={App}>
           <IndexRedirect to="dashboard/scoping" />
           <Route path="dashboard/:stage" component={Dashboard}/>
           <Route path="projects/:project" component={Project}>
