@@ -5,7 +5,23 @@ import { idGen } from '../utils'
 const nextId = idGen()
 
 export default model({
-  namespace: 'feature',
+  reducers: {
+    update: (state, { id, ...attrs }) => {
+      const feature = _.first(_.remove(state.features, { id }))
+      return { ...state, features: [ ...state.features, { ...feature, ...attrs } ] }
+    },
+    add: (state, payload) => ({
+      ...state,
+      features: _.concat(state.features, { id: nextId(), ...payload, name: '', score: 0 })
+    }),
+    delete: (state, { id } ) => ({
+      ...state,
+      features: _.reject(state.features, { id })
+    })
+  },
+  selectors: {
+    byEpic: (state, epicId) => _.chain(state.features).filter({ epic: epicId }).sortBy('id').value()
+  },
   state: {
     features: [
       {
@@ -72,22 +88,5 @@ export default model({
         score: 0,
       }
     ]
-  },
-  reducers: {
-    update: (state, { payload: { id, ...attrs } }) => {
-      const feature = _.remove(state.features, { id: id })[0]
-      return { ...state, features: [ ...state.features, { ...feature, ...attrs } ] }
-    },
-    add: (state, { payload }) => ({
-      ...state,
-      features: _.concat(state.features, { id: nextId(), ...payload, name: '', score: 0 })
-    }),
-    delete: (state, { payload: { id } }) => ({
-      ...state,
-      features: _.reject(state.features, { id: id })
-    })
-  },
-  selectors: {
-    byEpic: (state, epicId) => _.chain(state.features).filter({ epic: epicId }).sortBy('id').value()
   }
 })

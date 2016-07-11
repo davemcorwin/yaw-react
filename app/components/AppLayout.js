@@ -1,17 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import _ from 'lodash'
+import { select } from '../lib/model'
 
 import SideDrawer from './SideDrawer'
 
-export default ({children, select, send, ...props}) => {
+const AppLayout = ({ children, isShowSideDrawer, projects, dispatch }) => {
 
-  const showSideDrawer = e => { e.preventDefault(); send('ui:showSideDrawer'); }
+  const showSideDrawer = e => { e.preventDefault(); dispatch.ui.showSideDrawer(); }
+  const hideSideDrawer = dispatch.ui.hideSideDrawer
 
   return (
     <div style={{height: '100%'}}>
 
-      <SideDrawer {...{select, send}} />
+      <SideDrawer {{ hideSideDrawer, isShowSideDrawer, projects }} />
 
       <div className="wrapper">
 
@@ -28,7 +31,7 @@ export default ({children, select, send, ...props}) => {
         </nav>
 
         <div className="content">
-          {React.cloneElement(React.Children.only(children), {select, send, ...props})}
+          {children}
         </div>
 
         <footer>
@@ -38,3 +41,10 @@ export default ({children, select, send, ...props}) => {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  isShowSideDrawer: select().ui.showSideDrawer(state),
+  projects: select().project.all(state)
+})
+
+export default connect(mapStateToProps)(AppLayout)

@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import { modelsToSelectors } from '../lib/model'
 
 import * as models from '../models' // hack for now
 
-export default Component => connect(mapStateToProps, mapDispatchToProps)(Component)
+export default Component => connect(mapStateToProps)(Component)
 
 const mapStateToProps = state => {
   const selectors = modelsToSelectors(models)
@@ -14,7 +13,3 @@ const mapStateToProps = state => {
     }
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  send: (type, payload={}) => dispatch({ type, payload })
-})

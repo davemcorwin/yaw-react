@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-export default ({ select, send, project, ...props }) => {
+const Scoping = ({ select, send, project, ...props }) => {
 
   const epicTotal = (state, epic) => _.sumBy(epicFeatures(state, epic), 'score')
 
@@ -28,3 +28,10 @@ export default ({ select, send, project, ...props }) => {
     </div>
   )
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  epics: select().epic.byProject(ownProps.params.project),
+  stage: ownProps.params.stage
+})
+
+export default connect(mapStateToProps)(Scoping)

@@ -5,7 +5,21 @@ import { idGen } from '../utils'
 const nextId = idGen()
 
 export default model({
-  namespace: 'epic',
+  reducers: {
+    update: (state, { id, ...attrs }) => {
+      const epic = _.first(_.remove(state.epics, { id }))
+      return { ...state, epics: [ ...state.epics, { ...epic, ...attrs } ] }
+    },
+    add: (state, payload) => (
+      { ...state, epics: _.concat(state.epics, { id: nextId(), ...payload, name: '' }) }
+    ),
+    delete: (state, { id }) => (
+      { ...state, epics: _.reject(state.epics, { id }) }
+    )
+  },
+  selectors: {
+    byProject: (state, projectId) => _.chain(state.epics).filter({ project: projectId }).sortBy('id').value()
+  },
   state: {
     epics: [
       {
@@ -27,20 +41,5 @@ export default model({
         slug: 'dashboard'
       }
     ]
-  },
-  reducers: {
-    update: (state, { payload: { id, ...attrs } }) => {
-      const epic = _.remove(state.epics, { id: id })[0]
-      return { ...state, epics: [ ...state.epics, { ...epic, ...attrs } ] }
-    },
-    add: (state, { payload }) => (
-      { ...state, epics: _.concat(state.epics, { id: nextId(), ...payload, name: '' }) }
-    ),
-    delete: (state, { payload: { id } }) => (
-      { ...state, epics: _.reject(state.epics, { id: id }) }
-    )
-  },
-  selectors: {
-    byProject: (state, projectId) => _.chain(state.epics).filter({ project: projectId }).sortBy('id').value()
   }
 })

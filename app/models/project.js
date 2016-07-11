@@ -5,7 +5,11 @@ import { idGen } from '../utils'
 const nextId = idGen()
 
 export default model({
-  namespace: 'project',
+  selectors: {
+    all: state => state.projects,
+    bySlug: (state, slug) => _.find(state.projects, { slug }),
+    byStage: (state, stage) => _.filter(state.projects, { stage })
+  },
   state: {
     projects: [
       {
@@ -20,10 +24,6 @@ export default model({
         name: 'Wilson',
         stage: 'scoping'
       }
-    ],
-  },
-  selectors: {
-    all: state => state.projects,
-    bySlug: (state, slug) => _.find(state.projects, { slug })
+    ]
   }
 })
