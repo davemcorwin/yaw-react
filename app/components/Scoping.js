@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const Scoping = ({ select, send, project, ...props }) => {
+import { connect } from '../lib/model'
 
-  const epicTotal = (state, epic) => _.sumBy(epicFeatures(state, epic), 'score')
+const Scoping = ({ epics, project, stage, dispatch }) => {
 
-  const epics = select('epic:byProject', project.id)
+  // const epicTotal = (state, epic) => _.sumBy(epicFeatures(state, epic), 'score')
+
   // const features = select('feature:byEpic', epic.id)
-  const addEpic = () => send('epic:add', { project: project.id })
+  const addEpic = dispatch.epic.add({ project: project.id })
 
   // const projectScore = _.sumBy(epics, epic => epicTotal(state, epic))
   //
@@ -29,9 +30,10 @@ const Scoping = ({ select, send, project, ...props }) => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  epics: select().epic.byProject(ownProps.params.project),
+const mapSelectToProps = (select, ownProps) => ({
+  epics: select.epic.byProject(ownProps.params.project),
+  project: select.project.bySlug(ownProps.params.project),
   stage: ownProps.params.stage
 })
 
-export default connect(mapStateToProps)(Scoping)
+export default connect(mapSelectToProps)(Scoping)

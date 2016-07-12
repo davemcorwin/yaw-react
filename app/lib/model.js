@@ -1,42 +1,42 @@
 import _ from 'lodash'
 import { assignAll, createAction, createReducer } from 'redux-act'
+import { connect as reduxConnect } from 'react-redux'
+
+const _models = {}
 
 export default (config={}) => {
 
   const actions = _.mapValues(config.reducers, (_v, key) => createAction(key))
   const reducerObj = _.mapKeys(config.reducers, (_v, key) => actions[key])
 
-  return {
+  const model = {
     ...config,
     reducer: createReducer(reducerObj, config.state),
     actions
   }
+
+  _models.push(model)
+
+  return model
 }
 
-export const applyModels =
-  models => createStore => (reducer, preloadedState, enhancer) => {
+export const connect = mapSelectToProps => {
 
-    // Create the store
-    const store = createStore(reducer, preloadedState, enhancer)
+  const select = state => _models.map(model =>
+    _.mapValues(model.selectors, selector => selector.bind(null, state))
+  )
 
-    // Map model actions and selectors
-    const actions = mapModelActions(models)
+  const mapStateToProps = (state, ownProps) => mapSelectToProps(select(state), ownProps)
+  const mapDispatchToProps = dispatch => _models.map(model =>
+    model.actions
+  )
 
-    // Add namespaced actions to the dispatch function
-    const dispatch = Object.assign(store.dispatch, actions)
-
-    // Assign all action creators to the store
-    assignAll(actions, store)
-
-    // Return 'enhanced' store
-    return {
-      ...store,
-      dispatch
-    }
-  }
-
-export const select = () => mapModelSelectors
+  return reduxConnect(mapStateToProps, mapDispatchToProps)
+}
 
 export const mapModelReducers  = models => _.mapValues(models, model => model.reducer)
-export const mapModelActions   = models => _.mapValues(models, model => model.actions)
-export const mapModelSelectors = models => _.mapValues(models, model => model.selectors)
+export const mapModelActions   = models => _
+  .chain(models)
+  .values()
+  .flatMapDeep(model => _.values(model.actions))
+  .value()

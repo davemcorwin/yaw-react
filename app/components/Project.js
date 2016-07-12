@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
 import _ from 'lodash'
 
-import { select } from '../lib/model'
+import { connect } from '../lib/model'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
 
@@ -34,9 +33,9 @@ const Project = ({ children, project, stage }) =>
     </div>
   </div>
 
-const mapStateToProps = (state, ownProps) => ({
-  project: select().project.bySlug(ownProps.params.project),
+const mapSelectToProps = (select, ownProps) => ({
+  project: select.project.bySlug(ownProps.params.project),
   stage: ownProps.params.stage
 })
 
-export default connect(mapStateToProps)(Project)
+export default connect(mapSelectToProps)(Project)
