@@ -6,7 +6,7 @@ import { connect } from '../utils'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
 
-const Dashboard = ({ projects, stage, stageProjects }) =>
+const Dashboard = ({ projects, stage, stageProjects, actions: { deleteProject } }) =>
   <div className="tab-container">
 
     <div className="tab-row">
@@ -24,13 +24,22 @@ const Dashboard = ({ projects, stage, stageProjects }) =>
 
     <div className="tab-content flex-grid">
       {_.map(stageProjects, project =>
-        <Link
-          key={project.slug}
-          className="card project-card"
-          to={`/projects/${project.slug}/${stage}`}>
+        <div className="card project-card">
+          <div className="actions">
+            <div className="u-pull-right">
+              <a href="#" className="icon edit-icon"> </a>
+              <a href="#" className="icon trash-icon" onClick={(e) => { e.preventDefault(); deleteProject({id: project.id}); }}/>
+            </div>
+          </div>
+          <div className="content">
+            <Link
+              key={project.slug}
+              to={`/projects/${project.slug}/${stage}`}>
 
-          <h3>{project.name}</h3>
-        </Link>
+              <h3>{project.name}</h3>
+            </Link>
+          </div>
+        </div>
       )}
     </div>
   </div>
