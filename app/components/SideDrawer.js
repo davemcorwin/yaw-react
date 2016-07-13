@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import classnames from 'classnames'
+import { Link } from 'react-router'
 
 export default ({ hideSideDrawer, isShowSideDrawer, projects }) =>
   <div className={classnames('side-drawer', {active: isShowSideDrawer})}>

@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 import _ from 'lodash'
-
-import { connect } from '../lib/model'
+import { connect } from '../utils'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
 
@@ -36,10 +35,12 @@ const Dashboard = ({ projects, stage, stageProjects }) =>
     </div>
   </div>
 
+Dashboard.displayName = 'Dashboard'
+
 const mapSelectToProps = (select, ownProps) => ({
-  projects: select.project.all(),
+  projects: select.allProjects(),
   stage: ownProps.params.stage,
-  stageProjects: select.project.byStage(ownProps.params.stage)
+  stageProjects: select.projectsForStage(ownProps.params.stage)
 })
 
 export default connect(mapSelectToProps)(Dashboard)

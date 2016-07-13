@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 import _ from 'lodash'
-
-import { connect } from '../lib/model'
+import { connect } from '../utils'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
 
@@ -34,7 +33,7 @@ const Project = ({ children, project, stage }) =>
   </div>
 
 const mapSelectToProps = (select, ownProps) => ({
-  project: select.project.bySlug(ownProps.params.project),
+  project: select.projectBySlug(ownProps.params.project),
   stage: ownProps.params.stage
 })
 

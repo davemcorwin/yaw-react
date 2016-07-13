@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
 import _ from 'lodash'
-import { connect } from '../lib/model'
+import { connect } from '../utils'
 
 import SideDrawer from './SideDrawer'
 
-const AppLayout = ({ children, isShowSideDrawer, projects, dispatch }) => {
+const AppLayout = ({ children, isShowSideDrawer, projects, actions }) => {
 
-  const showSideDrawer = e => { e.preventDefault(); dispatch.ui.showSideDrawer(); }
-  const hideSideDrawer = dispatch.ui.hideSideDrawer
+  const showSideDrawer = e => { e.preventDefault(); actions.uiShowSideDrawer(); }
+  const hideSideDrawer = actions.uiHideSideDrawer
 
   return (
     <div style={{height: '100%'}}>
@@ -42,8 +42,8 @@ const AppLayout = ({ children, isShowSideDrawer, projects, dispatch }) => {
 }
 
 const mapSelectToProps = select => ({
-  isShowSideDrawer: select.ui.showSideDrawer(),
-  projects: select.project.all()
+  isShowSideDrawer: select.uiIsShowSideDrawer(),
+  projects: select.allProjects()
 })
 
 export default connect(mapSelectToProps)(AppLayout)

@@ -1,14 +1,23 @@
-import model from '../lib/model'
+import { createAction, createReducer } from 'redux-act'
 
-export default model({
-  reducers: {
-    hideSideDrawer: state => ({ ...state, showSideDrawer: false }),
-    showSideDrawer: state => ({ ...state, showSideDrawer: true })
-  },
-  selectors: {
-    showSideDrawer: state => state.showSideDrawer
-  },
-  state: {
-    showSideDrawer: false
-  }
-})
+export const actions = {
+  uiHideSideDrawer: createAction('hide side drawer'),
+  uiShowSideDrawer: createAction('show side drawer')
+}
+
+export const selectors = {
+  uiIsShowSideDrawer: state => state.showSideDrawer
+}
+
+export const initialState = {
+  showSideDrawer: false
+}
+
+export const reducer = createReducer({
+  [actions.uiHideSideDrawer]: state => ({ ...state, showSideDrawer: false }),
+  [actions.uiShowSideDrawer]: state => ({ ...state, showSideDrawer: true })
+}, initialState)
+
+export default {
+  actions, initialState, reducer, selectors
+}
