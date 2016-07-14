@@ -2,18 +2,31 @@ import React from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 import _ from 'lodash'
+import { browserHistory } from 'react-router' //ghetto
+
 import { connect } from '../utils'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
 
-const Project = ({ children, project, stage }) =>
+const Project = ({ children, project, stage }, { router }) =>
   <div className="project-view">
 
-    <h3 className="project-header">{project.name}</h3>
+    <div className="project-header">
+      <h3 className="title">
+        {project.name}
+      </h3>
+        <select
+          className="stage-selector"
+          onChange={(e) => browserHistory.push(`/projects/cashup/${e.target.value}`)}>
+          { stages.map(stage => <option key={stage} value={stage}>{_.capitalize(stage)}</option>)}
+        </select>
+        <div className="selector-chevron">&#x25bc;</div>
+    </div>
 
     <div className="project-container">
-
-      <aside>
+      {children}
+    </div>
+      {/*<aside>
         {_.map(stages, stg =>
           <Link
             key={stg}
@@ -27,9 +40,9 @@ const Project = ({ children, project, stage }) =>
       </aside>
 
       <main>
-        {children}
+
       </main>
-    </div>
+    </div>*/}
   </div>
 
 const mapSelectToProps = (select, ownProps) => ({

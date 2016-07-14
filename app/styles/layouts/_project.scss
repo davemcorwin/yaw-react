@@ -6,7 +6,31 @@
 
   .project-header{
     margin-bottom: 1rem;
-    flex-basis: 2rem;
+    flex-basis: 4rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    .title{
+      flex: 2 70%;
+    }
+
+    .stage-selector{
+      flex-basis: 30%;
+      border: none;
+      border-bottom: 1px solid $font-color;
+      border-radius: 0;
+      outline: none;
+      color: $font-color;
+      background: transparent;
+      z-index: 2;
+    }
+
+    .selector-chevron{
+      position: fixed;
+      right: 18px;
+      padding-top: .5rem;
+    }
   }
 
   .project-container{
@@ -30,7 +54,6 @@
       a{
         flex-basis: 4rem;
         cursor: pointer;
-        color: $primary-color;
         padding: 1rem;
         font-weight: 500;
         border-right: 1px solid $border-color;
@@ -41,18 +64,12 @@
           border: 1px solid $border-color;
           border-right: none;
         }
-
-        &:hover{
-          // color: $primary-color-light;
-        }
       }
     }
 
     main{
       flex: 2;
       padding: 1rem;
-      background-color: $background-color;
-      overflow: scroll;
       border: 1px solid $border-color;
       border-left: none;
     }
