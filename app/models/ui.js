@@ -1,21 +1,27 @@
 import { createAction, createReducer } from 'redux-act'
 
 export const actions = {
-  uiHideSideDrawer: createAction('hide side drawer'),
-  uiShowSideDrawer: createAction('show side drawer')
+  uiHideSideDrawer:  createAction('hide side drawer'),
+  uiShowSideDrawer:  createAction('show side drawer'),
+  uiHideProjectModal: createAction('hide project modal'),
+  uiShowProjectModal: createAction('show project modal')
 }
 
 export const selectors = {
-  uiIsShowSideDrawer: state => state.showSideDrawer
+  uiIsShowSideDrawer: state => state.showSideDrawer,
+  uiIsShowProjectModal: state => state.showProjectModal
 }
 
 export const initialState = {
-  showSideDrawer: false
+  showSideDrawer: false,
+  showProjectModal: false
 }
 
 export const reducer = createReducer({
   [actions.uiHideSideDrawer]: state => ({ ...state, showSideDrawer: false }),
-  [actions.uiShowSideDrawer]: state => ({ ...state, showSideDrawer: true })
+  [actions.uiShowSideDrawer]: state => ({ ...state, showSideDrawer: true }),
+  [actions.uiHideProjectModal]: state => ({ ...state, showProjectModal: false }),
+  [actions.uiShowProjectModal]: state => ({ ...state, showProjectModal: true })
 }, initialState)
 
 export default {

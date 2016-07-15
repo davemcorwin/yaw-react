@@ -1,0 +1,21 @@
+*:focus {
+  outline: none;
+}
+
+form.form{
+
+  input{
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid $border-color;
+    border-radius: 0;
+    font-weight: 200;
+
+    &:focus, &:hover{
+      outline: none;
+      border: none;
+      border-bottom: 2px solid lighten($border-color, 10%);
+    }
+  }
+}

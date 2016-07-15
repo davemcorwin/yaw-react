@@ -3,11 +3,14 @@ import { Link } from 'react-router'
 import _ from 'lodash'
 import { connect } from '../utils'
 
+import Modal from './Modal'
 import SideDrawer from './SideDrawer'
+import ProjectForm from './ProjectForm'
 
-const AppLayout = ({ children, isShowSideDrawer, projects, actions }) => {
+const AppLayout = ({ children, isShowSideDrawer, isShowProjectModal, projects, actions }) => {
 
   const showSideDrawer = e => { e.preventDefault(); actions.uiShowSideDrawer(); }
+  const showProjectModal = e => { e.preventDefault(); actions.uiShowProjectModal(); }
   const hideSideDrawer = actions.uiHideSideDrawer
 
   return (
@@ -20,7 +23,7 @@ const AppLayout = ({ children, isShowSideDrawer, projects, actions }) => {
         <nav role="banner">
           <div className="nav-item left">
             <Link to="#" className="nav-link" onClick={showSideDrawer}>Projects</Link>
-            <Link to="#" className="nav-link">+</Link>
+            <Link to="#" className="nav-link" onClick={showProjectModal}>+</Link>
           </div>
           <div className="nav-item">
             <Link to="/" className="nav-link">Yaw</Link>
@@ -37,12 +40,20 @@ const AppLayout = ({ children, isShowSideDrawer, projects, actions }) => {
           <p>Made with ♥ by Dave!</p>
         </footer>
       </div>
+
+      <Modal
+        show={isShowProjectModal}
+        hideModal={actions.uiHideProjectModal}>
+
+        <ProjectForm hideModal={actions.uiHideProjectModal}/>
+      </Modal>
     </div>
   )
 }
 
 const mapSelectToProps = select => ({
   isShowSideDrawer: select.uiIsShowSideDrawer(),
+  isShowProjectModal: select.uiIsShowProjectModal(),
   projects: select.allProjects()
 })
 

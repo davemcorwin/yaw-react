@@ -1,0 +1,31 @@
+button.button{
+  color: $font-color;
+  border: none;
+  text-transform: none;
+  font-size: 1.4rem;
+
+  &:hover, &:focus {
+    color: lighten($font-color, 10%);
+    background-color: inherit;
+  }
+
+  &.button-primary{
+    color: $font-color;
+    background-color: $border-color;
+    border-radius: 0;
+    box-shadow: 0px 2px 2px 0px #111;
+
+    &:hover, &:focus {
+      color: $font-color;
+      background-color: $border-color;
+      box-shadow: 0px 3px 6px 0px #000;
+      border: none;
+    }
+
+    &:active{
+      box-shadow: 0px 1px 2px 0px #090909;
+      border: none;
+    }
+  }
+
+}

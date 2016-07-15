@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
 import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
+import { formReducer } from 'react-redux-form'
+import thunk from 'redux-thunk'
+
 
 import { reducers } from './models'
 import routes from './routes'
@@ -10,10 +13,11 @@ import routes from './routes'
 const store = createStore(
   combineReducers({
     ...reducers,
+    projectForm: formReducer('project', {}),
     routing: routerReducer
   }),
   compose(
-    applyMiddleware(routerMiddleware(browserHistory)),
+    applyMiddleware(thunk, routerMiddleware(browserHistory)),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 )

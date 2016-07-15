@@ -1,7 +1,7 @@
 import React from 'react'
 
-const styles = {
-  display:         'none',
+const styles = show => ({
+  display:         show ? 'flex' : 'none',
   position:        'fixed',
   zIndex:          '10',
   left:            '0',
@@ -9,25 +9,37 @@ const styles = {
   width:           '100%',
   height:          '100%',
   overflow:        'auto',
-  backgroundColor: 'rgba(0,0,0,0.4)'
-}
+  backgroundColor: 'rgba(0,0,0,0.6)',
+  justifyContent:  'center',
+  alignItems:      'center'
+})
 
-const contentStyles = {
-  backgroundColor: '#fefefe',
-  margin:          '15% auto',
+const containerStyles = {
+  backgroundColor: 'rgb(40, 48, 52)',
   padding:         '20px',
-  border:          '1px solid #888',
-  width:           '80%'
+  border:          '1px solid rgb(62, 68, 81)',
+  width:           '50%'
 }
 
 const closeButtonStyles = {
-  float: 'right';
+  float: 'right'
 }
 
-export default ({ children }) =>
-  <div style={styles}>
-    <a style={closeButtonStyles} href="#">X</a>
-    <div style={contentStyles}>
+export default ({ children, show, hideModal }) =>
+  <div
+    style={styles(show)}
+    onClick={hideModal}>
+
+    <div style={containerStyles} onClick={e => e.stopPropagation()}>
       {children}
     </div>
   </div>
+
+  // <div style={{height: '2rem'}}>
+  //   <a
+  //     style={closeButtonStyles}
+  //     href="#"
+  //     onClick={e => { e.preventDefault(); hideModal(); }}>
+  //     <h4>X</h4>
+  //   </a>
+  // </div>

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { actions, selectors } from '../models'
 
-export default mapSelectToProps => {
+export default (mapSelectToProps=f=>f) => {
 
   const selectWithState = state => _.mapValues(selectors, selector => (...args) => selector(state, ...args))
 
