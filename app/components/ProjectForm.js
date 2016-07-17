@@ -1,24 +1,22 @@
 import React from 'react'
-import { Field, Form } from 'react-redux-form'
-import { connect } from '../utils'
+import {reduxForm} from 'redux-form'
 
-const ProjectForm = ({ project, actions: { addProject }, hideModal }) =>
-  <Form
+const ProjectForm = ({
+  fields: { name },
+  handleSubmit,
+  hideModal
+}) =>
+  <form
     className="form"
-    model="project"
-    onSubmit={projectAttributes => {
-      addProject(projectAttributes)
-      hideModal()
-    }}>
+    onSubmit={handleSubmit}>
 
     <h3>New Project</h3>
-    <Field model="project.name">
-      <label>Project Name:</label>
-      <input type="text" autofocus/>
-    </Field>
+    <label>Project Name:</label>
+    <input type="text" {...name} autofocus/>
 
     <div className="u-pull-right">
       <button
+        type="button"
         className="button"
         onClick={hideModal}>
         Cancel
@@ -30,10 +28,9 @@ const ProjectForm = ({ project, actions: { addProject }, hideModal }) =>
         Create
       </button>
     </div>
-  </Form>
+  </form>
 
-const mapSelectToProps = (select, ownProps) => ({
-  // project: select.projectBySlug(ownProps.params.project)
-})
-
-export default connect(mapSelectToProps)(ProjectForm)
+export default reduxForm({
+  form: 'project',
+  fields: ['name']
+})(ProjectForm)

@@ -41,12 +41,18 @@ const AppLayout = ({ children, isShowSideDrawer, isShowProjectModal, projects, a
         </footer>
       </div>
 
-      <Modal
-        show={isShowProjectModal}
-        hideModal={actions.uiHideProjectModal}>
+      { isShowProjectModal ?
+        <Modal hideModal={actions.uiHideProjectModal}>
 
-        <ProjectForm hideModal={actions.uiHideProjectModal}/>
-      </Modal>
+          <ProjectForm
+            hideModal={actions.uiHideProjectModal}
+            onSubmit={data => {
+              actions.addProject(data)
+              actions.uiHideProjectModal()
+            }}/>
+        </Modal>
+        : null
+      }
     </div>
   )
 }

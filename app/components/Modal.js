@@ -1,7 +1,7 @@
 import React from 'react'
 
-const styles = show => ({
-  display:         show ? 'flex' : 'none',
+const styles = {
+  display:         'flex',
   position:        'fixed',
   zIndex:          '10',
   left:            '0',
@@ -12,7 +12,7 @@ const styles = show => ({
   backgroundColor: 'rgba(0,0,0,0.6)',
   justifyContent:  'center',
   alignItems:      'center'
-})
+}
 
 const containerStyles = {
   backgroundColor: 'rgb(40, 48, 52)',
@@ -25,9 +25,9 @@ const closeButtonStyles = {
   float: 'right'
 }
 
-export default ({ children, show, hideModal }) =>
+export default ({ children, hideModal }) =>
   <div
-    style={styles(show)}
+    style={styles}
     onClick={hideModal}>
 
     <div style={containerStyles} onClick={e => e.stopPropagation()}>

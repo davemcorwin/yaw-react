@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import { createAction, createReducer } from 'redux-act'
-import { modeled } from 'react-redux-form'
 import { idGen } from '../utils'
 
 const nextId = idGen()
@@ -35,7 +34,7 @@ export const initialState = {
   ]
 }
 
-export const reducer = modeled(createReducer({
+export const reducer = createReducer({
   [actions.updateProject]: (state, { id, ...attrs }) => {
     const project = _.first(_.remove(state.projects, { id }))
     return { ...state, projects: [ ...state.projects, { ...project, ...attrs } ] }
@@ -45,12 +44,8 @@ export const reducer = modeled(createReducer({
   ),
   [actions.deleteProject]: (state, { id }) => (
     { ...state, projects: _.reject(state.projects, { id }) }
-  ),
-  [actions.submitProjectForm]: (state) => {
-    console.log('Project Submitted!')
-    return state
-  }
-}, initialState), 'project')
+  )
+}, initialState)
 
 export default {
   actions, initialState, reducer, selectors
