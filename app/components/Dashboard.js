@@ -27,7 +27,6 @@ const Dashboard = ({ projects, stage, stageProjects, actions: { deleteProject } 
         <div className="card project-card">
           <div className="actions">
             <div className="u-pull-right">
-              <a href="#" className="icon edit-icon"> </a>
               <a href="#" className="icon trash-icon" onClick={(e) => { e.preventDefault(); deleteProject({id: project.id}); }}/>
             </div>
           </div>
