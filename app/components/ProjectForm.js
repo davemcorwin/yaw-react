@@ -12,7 +12,10 @@ const ProjectForm = ({
 
     <h3>New Project</h3>
     <label>Project Name:</label>
-    <input type="text" {...name} autofocus/>
+    <input
+      ref={input => input && input.focus()}
+      type="text"
+      {...name} />
 
     <div className="u-pull-right">
       <button

@@ -15,6 +15,11 @@ export const selectors = {
     .chain(state.features)
     .filter({ epic: epicId })
     .sortBy('id')
+    .value(),
+  featuresForProject: (state, projectId) => _
+    .chain(state.features)
+    .filter({ project: projectId })
+    .sortBy('id')
     .value()
 }
 
@@ -46,42 +51,42 @@ const initialState = {
       project: 1,
       epic: 2,
       name: 'Receive Safe',
-      score: 0,
+      score: 11,
     },
     {
       id: nextId(),
       project: 1,
       epic: 2,
       name: 'Receive Setup Instructions',
-      score: 0,
+      score: 17,
     },
     {
       id: nextId(),
       project: 1,
       epic: 2,
       name: 'Confirm Safe Connection',
-      score: 0,
+      score: 4,
     },
     {
       id: nextId(),
       project: 1,
       epic: 3,
       name: 'View Total Cash Balance',
-      score: 0,
+      score: 7,
     },
     {
       id: nextId(),
       project: 1,
       epic: 3,
       name: 'View Cash Balance By Location',
-      score: 0,
+      score: 7,
     },
     {
       id: nextId(),
       project: 1,
       epic: 3,
       name: 'View Cash Balance By Safe',
-      score: 0,
+      score: 8,
     }
   ]
 }

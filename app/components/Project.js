@@ -26,23 +26,6 @@ const Project = ({ children, project, stage }, { router }) =>
     <div className="project-container">
       {children}
     </div>
-      {/*<aside>
-        {_.map(stages, stg =>
-          <Link
-            key={stg}
-            to={`/projects/${project.slug}/${stg}`}
-            className={classnames({'active': stage === stg})}>
-
-            {_.capitalize(stg)}
-          </Link>
-        )}
-        <div className="filler"> </div>
-      </aside>
-
-      <main>
-
-      </main>
-    </div>*/}
   </div>
 
 const mapSelectToProps = (select, ownProps) => ({

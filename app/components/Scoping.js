@@ -2,35 +2,69 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from '../utils'
 
-const Scoping = ({ epics, project, stage, actions: { addEpic } }) => {
-  // const epicTotal = (state, epic) => _.sumBy(epicFeatures(state, epic), 'score')
+import EpicDetail from './EpicDetail'
+import ScopingChart from './ScopingChart'
 
-  // const features = select('feature:byEpic', epic.id)
+const Scoping = ({
+  epics,
+  features,
+  project,
+  selectedEpic,
+  selectedFeatures,
+  stage,
+  actions: { addEpic, addFeature, updateFeature }
+}) =>
+  <div className="scoping-view">
+    <aside className="epic-list">
+      <form
+        className="form"
+        style={{marginBottom: '0', padding: '0 5px 0 5px'}}
+        onSubmit={e => {
+          e.preventDefault()
+          addEpic({project: project.id, name: e.currentTarget.name.value})
+          e.currentTarget.name.value = ''
+        }}>
 
-  // const projectScore = _.sumBy(epics, epic => epicTotal(state, epic))
-  //
-  // const labels = epics.map(epic => epic.name)
-  // const data = epics.map(epic => epicTotal(state, epic))
-  // const selectedEpic = _.first(epics)
+        <input type="text" placeholder="New..." name="name"/>
+        <input type="submit" style={{display: 'none'}}/>
+      </form>
+      <div className="epic-list-container">
+        {_.map(epics, epic =>
+          <Link
+            key={epic.slug}
+            to={`/projects/${project.slug}/${stage}/${epic.slug}`}
+            className="epic-link">
 
-  return (
-    <div className="scoping-view">
-      <section className="epic-list-container">
-        <h5>Epics</h5>
-        {_.map(epics, epic => <Link key={epic.slug} to={epic.slug}>{epic.name}</Link>)}
-        <Link className="add-epic" to="#" onClick={() => addEpic({ project: project.id })}>+</Link>
+            {epic.name}
+          </Link>)}
+        </div>
+    </aside>
+    <main className="epic-container">
+      <section className="epic-detail">
+        <EpicDetail
+          add={() => addFeature({ epic: selectedEpic.id, project: project.id })}
+          epic={selectedEpic}
+          features={selectedFeatures}
+          update={updateFeature} />
       </section>
-      <section className="epic-detail-container">
-        {/*{t.epicCard({selectedEpic, project}, state, send)}*/}
+      <section className="epic-chart">
+        <h4>Total {_.sumBy(features, 'score')}</h4>
+        <ScopingChart {...{epics, features, project}} />
       </section>
-    </div>
-  )
+    </main>
+  </div>
+
+const mapSelectToProps = (select, ownProps) => {
+  const project = select.projectBySlug(ownProps.params.project)
+  const selectedEpic = select.epicBySlug(ownProps.params.epic)
+  return {
+    epics: select.epicsForProject(project.id),
+    features: select.featuresForProject(project.id),
+    project,
+    selectedEpic,
+    selectedFeatures: selectedEpic && select.featuresForEpic(selectedEpic.id),
+    stage: ownProps.params.stage
+  }
 }
-
-const mapSelectToProps = (select, ownProps) => ({
-  epics: select.epicsForProject(ownProps.params.project),
-  project: select.projectBySlug(ownProps.params.project),
-  stage: ownProps.params.stage
-})
 
 export default connect(mapSelectToProps)(Scoping)

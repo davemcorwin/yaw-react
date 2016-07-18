@@ -24,7 +24,7 @@ const Dashboard = ({ projects, stage, stageProjects, actions: { deleteProject } 
 
     <div className="tab-content flex-grid">
       {_.map(stageProjects, project =>
-        <div className="card project-card">
+        <div key={project.slug} className="card project-card">
           <div className="actions">
             <div className="u-pull-right">
               <a href="#" className="icon trash-icon" onClick={(e) => { e.preventDefault(); deleteProject({id: project.id}); }}/>

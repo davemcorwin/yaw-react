@@ -15,7 +15,8 @@ export const selectors = {
     .chain(state.epics)
     .filter({ project: projectId })
     .sortBy('id')
-    .value()
+    .value(),
+  epicBySlug: (state, slug) => _.find(state.epics, { slug })
 }
 
 export const initialState = {
@@ -47,7 +48,7 @@ export const reducer = createReducer({
     return { ...state, epics: [ ...state.epics, { ...epic, ...attrs } ] }
   },
   [actions.addEpic]: (state, payload) => (
-    { ...state, epics: _.concat(state.epics, { id: nextId(), ...payload, name: '' }) }
+    { ...state, epics: _.concat(state.epics, { id: nextId(), ...payload, slug: _.kebabCase(payload.name)}) }
   ),
   [actions.deleteEpic]: (state, { id }) => (
     { ...state, epics: _.reject(state.epics, { id }) }

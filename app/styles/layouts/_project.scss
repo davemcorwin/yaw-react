@@ -39,6 +39,8 @@
     display: flex;
     flex-flow: row nowrap;
     height: 100%;
+    border: 1px solid $border-color;
+    margin-top: 1rem;
 
     aside{
       flex-basis: 15rem;
@@ -66,38 +68,71 @@
         }
       }
     }
+  }
+}
 
-    main{
-      flex: 2;
+.scoping-view{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+
+  .epic-list{
+    flex: 0 1 20rem;
+    border-right: 1px solid $border-color;
+
+    h5{
+      padding: 4px;
+      margin-bottom: 2px;
+    }
+
+    .epic-list-container{
+      // overflow-y: scroll;
+
+      .epic-link{
+        display: block;
+        border: 1px solid $border-color;
+      }
+    }
+  }
+
+  .epic-container{
+    flex: 2;
+
+    display: flex;
+    flex-flow: row nowrap;
+    border: none;
+
+    section{
+      flex: 1 1 50%;
+      border-right: 1px solid $border-color;
       padding: 1rem;
-      border: 1px solid $border-color;
-      border-left: none;
     }
   }
 }
-//
-// .scoping-view{
-//   display: flex;
-//   flex-flow: row nowrap;
-//
-//   .epic-list-container{
-//     flex-basis: 20rem;
-//
-//     a{
-//       display: block;
-//
-//       &.active{
-//         text-decoration: underline;
-//         // background-color: $background-color;
-//       }
-//     }
-//   }
-//
-//   .epic-detail-container{
-//     flex: 2;
-//     // margin-top: 6rem;
-//     padding: 1rem;
-//     background-color: $drawer-background-color;
-//     border: 1px solid $border-color;
-//   }
+  // .epic-list{
+  //   flex-basis: 20rem;
+
+
+    // a{
+    //   display: block;
+    //
+    //   &.active{
+    //     text-decoration: underline;
+    //     // background-color: $background-color;
+    //   }
+    // }
+  // }
+
+  // .epic-detail{
+  //   flex: 2, 40%;
+  //   // margin-top: 6rem;
+  //   // padding: 1rem;
+  //   // background-color: $drawer-background-color;
+  //   border-right: 1px solid $border-color;
+  // }
+
+  // .epic-chart{
+  //   flex: 2, 40%;
+  // }
 // }
+//
