@@ -40,7 +40,7 @@ export const reducer = createReducer({
     return { ...state, projects: [ ...state.projects, { ...project, ...attrs } ] }
   },
   [actions.addProject]: (state, payload) => (
-    { ...state, projects: _.concat(state.projects, { id: nextId(), name: '', ...payload, stage: 'scoping' }) }
+    { ...state, projects: _.concat(state.projects, { id: nextId(), name: '', ...payload, slug: _.kebabCase(payload.name), stage: 'scoping' }) }
   ),
   [actions.deleteProject]: (state, { id }) => (
     { ...state, projects: _.reject(state.projects, { id }) }
