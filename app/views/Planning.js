@@ -28,12 +28,18 @@ const addListStyles = {
 
 const cardStyles = {
   backgroundColor: 'white',
-  height: '5rem',
+  height: '6rem',
   borderRadius: '5px',
   margin: '1rem auto',
 }
 
-const List = ({ deletePhase, features, phase }) =>
+const Card = ({ feature, epic }) =>
+  <div style={cardStyles}>
+    <b>{epic.name}:</b>
+    <p>{feature.name}</p>
+</div>
+
+const List = ({ deletePhase, epics, features, phase }) =>
   <div style={listStyles}>
 
     <h4>{phase}
@@ -47,13 +53,15 @@ const List = ({ deletePhase, features, phase }) =>
     </h4>
 
     { features.map(feature =>
-        <div key={feature.name} style={cardStyles}>
-          <p>{feature.name}</p>
-        </div>
-    )}
+        <Card
+          key={feature.name}
+          feature={feature}
+          epic={_.find(epics, { id: feature.epic })} />
+      )}
   </div>
 
 const Planning = ({
+  epics,
   features,
   project,
   actions: {
@@ -86,6 +94,7 @@ const Planning = ({
 
       <List
         deletePhase={deletePhase.bind(null, "Unassigned")}
+        epics={epics}
         features={features.filter(feature => !feature.phase)}
         phase="Unassigned" />
 
@@ -93,6 +102,7 @@ const Planning = ({
       { project.phases.map(phase =>
           <List
             deletePhase={deletePhase.bind(null, phase)}
+            epics={epics}
             features={features.filter(feature => feature.phase === phase)}
             key={phase}
             phase={phase} />
@@ -112,6 +122,7 @@ const Planning = ({
 const mapSelectToProps = (select, ownProps) => {
   const project = select.projectBySlug(ownProps.params.project)
   return {
+    epics: select.epicsForProject(project.id),
     features: select.featuresForProject(project.id),
     project: project
   }
