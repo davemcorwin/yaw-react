@@ -1,9 +1,11 @@
-import React from 'react'
+import React    from 'react'
 import { Link } from 'react-router'
-import { connect } from '../utils'
 
-import EpicDetail from './EpicDetail'
-import ScopingChart from './ScopingChart'
+import { connect } from '../utils'
+import {
+  EpicDetail,
+  ScopingChart
+} from '../components'
 
 const Scoping = ({
   epics,
@@ -11,11 +13,12 @@ const Scoping = ({
   project,
   selectedEpic,
   selectedFeatures,
-  stage,
   actions: { addEpic, addFeature, updateFeature }
 }) =>
   <div className="scoping-view">
+
     <aside className="epic-list">
+
       <form
         className="form"
         style={{marginBottom: '0', padding: '0 5px 0 5px'}}
@@ -28,18 +31,21 @@ const Scoping = ({
         <input type="text" placeholder="New..." name="name"/>
         <input type="submit" style={{display: 'none'}}/>
       </form>
+
       <div className="epic-list-container">
         {_.map(epics, epic =>
           <Link
             key={epic.slug}
-            to={`/projects/${project.slug}/${stage}/${epic.slug}`}
+            to={`/projects/${project.slug}/scoping/${epic.slug}`}
             className="epic-link">
 
             {epic.name}
           </Link>)}
         </div>
     </aside>
+
     <main className="epic-container">
+
       <section className="epic-detail">
         <EpicDetail
           add={() => addFeature({ epic: selectedEpic.id, project: project.id })}
@@ -47,6 +53,7 @@ const Scoping = ({
           features={selectedFeatures}
           update={updateFeature} />
       </section>
+
       <section className="epic-chart">
         <h4>Total {_.sumBy(features, 'score')}</h4>
         <ScopingChart {...{epics, features, project}} />
@@ -62,8 +69,7 @@ const mapSelectToProps = (select, ownProps) => {
     features: select.featuresForProject(project.id),
     project,
     selectedEpic,
-    selectedFeatures: selectedEpic && select.featuresForEpic(selectedEpic.id),
-    stage: ownProps.params.stage
+    selectedFeatures: selectedEpic && select.featuresForEpic(selectedEpic.id)
   }
 }
 

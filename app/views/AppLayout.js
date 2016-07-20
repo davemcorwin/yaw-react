@@ -1,11 +1,14 @@
-import React from 'react'
+import React    from 'react'
 import { Link } from 'react-router'
-import _ from 'lodash'
+import _        from 'lodash'
+
 import { connect } from '../utils'
 
-import Modal from './Modal'
-import SideDrawer from './SideDrawer'
-import ProjectForm from './ProjectForm'
+import {
+  Modal,
+  SideDrawer,
+  ProjectForm
+} from '../components'
 
 const AppLayout = ({ children, isShowSideDrawer, isShowProjectModal, projects, actions }) => {
 
@@ -21,15 +24,18 @@ const AppLayout = ({ children, isShowSideDrawer, isShowProjectModal, projects, a
       <div className="wrapper">
 
         <nav role="banner">
+
           <div className="nav-item left">
+
             <Link to="#" className="nav-link" onClick={showSideDrawer}>Projects</Link>
             <Link to="#" className="nav-link" onClick={showProjectModal}>+</Link>
           </div>
+
           <div className="nav-item">
             <Link to="/" className="nav-link">Yaw</Link>
           </div>
-          <div className="nav-item right">
-          </div>
+
+          <div className="nav-item right" />
         </nav>
 
         <div className="content">

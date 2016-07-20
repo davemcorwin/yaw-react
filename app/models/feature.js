@@ -7,7 +7,9 @@ const nextId = idGen()
 export const actions = {
   addFeature:    createAction('add feature'),
   updateFeature: createAction('update feature'),
-  deleteFeature: createAction('delete feature')
+  deleteFeature: createAction('delete feature'),
+  assignFeaturePhase:   createAction('assign feature phase'),
+  deleteFeaturePhase:   createAction('delete feature phase'),
 }
 
 export const selectors = {
@@ -92,18 +94,38 @@ const initialState = {
 }
 
 export const reducer = createReducer({
+
   [actions.updateFeature]: (state, { id, ...attrs }) => {
     const feature = _.first(_.remove(state.features, { id }))
     return { ...state, features: [ ...state.features, { ...feature, ...attrs } ] }
   },
+
   [actions.addFeature]: (state, payload) => ({
     ...state,
     features: _.concat(state.features, { id: nextId(), ...payload, name: '', score: 0 })
   }),
+
   [actions.deleteFeature]: (state, { id } ) => ({
     ...state,
     features: _.reject(state.features, { id })
-  })
+  }),
+
+  [actions.assignFeaturePhase]: (state, { id, phase } ) => {
+    const feature = _.find(state.features, { id })
+    return {
+      ...state,
+      features: [ ..._.reject(state.features, { id }), { ...feature, phase }]
+    }
+  },
+
+  [actions.deleteFeaturePhase]: (state, { id } ) => {
+    const feature = _.find(state.features, { id })
+    return {
+      ...state,
+      features: [ ..._.reject(state.features, { id }), { ...feature, phase: null }]
+    }
+  },
+
 }, initialState)
 
 export default {

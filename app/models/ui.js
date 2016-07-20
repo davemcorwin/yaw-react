@@ -8,13 +8,15 @@ export const actions = {
 }
 
 export const selectors = {
-  uiIsShowSideDrawer: state => state.showSideDrawer,
-  uiIsShowProjectModal: state => state.showProjectModal
+  uiIsShowSideDrawer:   state => state.showSideDrawer,
+  uiIsShowProjectModal: state => state.showProjectModal,
+  uiProjectStages:      state => state.projectStages
 }
 
 export const initialState = {
-  showSideDrawer: false,
-  showProjectModal: false
+  showSideDrawer:   false,
+  showProjectModal: false,
+  projectStages:    ['scoping', 'planning', 'allocating', 'reviewing']
 }
 
 export const reducer = createReducer({

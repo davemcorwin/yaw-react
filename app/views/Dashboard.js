@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React      from 'react'
+import { Link }   from 'react-router'
 import classnames from 'classnames'
-import _ from 'lodash'
+import _          from 'lodash'
+
 import { connect } from '../utils'
 
 const stages = ['scoping', 'planning', 'allocating', 'reviewing']
