@@ -39,7 +39,6 @@
     display: flex;
     flex-flow: row nowrap;
     height: 100%;
-    border: 1px solid $border-color;
     margin-top: 1rem;
 
     aside{
@@ -78,7 +77,6 @@
 
   .epic-list{
     flex: 0 1 20rem;
-    border-right: 1px solid $border-color;
 
     h5{
       padding: 4px;
@@ -104,7 +102,6 @@
 
     section{
       flex: 1 1 50%;
-      border-right: 1px solid $border-color;
       padding: 1rem;
     }
   }

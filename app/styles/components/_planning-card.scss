@@ -1,0 +1,10 @@
+.planning-card {
+  background-color: white;
+  height:           6rem;
+  border-radius:    5px;
+  margin:           1rem auto;
+
+  &.dragging{
+    visibility: hidden;
+  }
+}

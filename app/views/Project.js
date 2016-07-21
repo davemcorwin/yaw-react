@@ -2,11 +2,11 @@ import React              from 'react'
 import { Link }           from 'react-router'
 import classnames         from 'classnames'
 import _                  from 'lodash'
-import { browserHistory } from 'react-router' //ghetto
+import { browserHistory } from 'react-router'
 
 import { connect } from '../utils'
 
-const Project = ({ children, project, stages }) =>
+const Project = ({ children, location, project, stages }) =>
   <div className="project-view">
 
     <div className="project-header">
@@ -17,7 +17,8 @@ const Project = ({ children, project, stages }) =>
 
       <select
         className="stage-selector"
-        onChange={e => browserHistory.push(`/projects/cashup/${e.target.value}`)}>
+        onChange={e => browserHistory.push(`/projects/cashup/${e.target.value}`)}
+        value={_.last(location.pathname.split('/'))}>
 
         { stages.map(stage =>
             <option key={stage} value={stage}>
