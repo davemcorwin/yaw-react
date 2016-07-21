@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { IndexRedirect, Router, Route } from 'react-router'
 
 import {
+  Allocating,
   AppLayout,
   Dashboard,
   Planning,
@@ -19,7 +20,8 @@ export default (history, store) => (
         <Route path="projects/:project" component={Project}>
           <IndexRedirect to="scoping" />
           <Route path="scoping(/:epic)" component={Scoping}/>
-          <Route path="planning(/:epic)" component={Planning}/>
+          <Route path="planning" component={Planning}/>
+          <Route path="allocating" component={Allocating}/>
         </Route>
       </Route>
     </Router>
