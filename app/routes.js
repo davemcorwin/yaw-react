@@ -8,6 +8,7 @@ import {
   Dashboard,
   Planning,
   Project,
+  Reviewing,
   Scoping
 } from './views'
 
@@ -22,6 +23,7 @@ export default (history, store) => (
           <Route path="scoping(/:epic)" component={Scoping}/>
           <Route path="planning" component={Planning}/>
           <Route path="allocating" component={Allocating}/>
+          <Route path="reviewing" component={Reviewing}/>
         </Route>
       </Route>
     </Router>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
+import _ from 'lodash'
 
 import Card from './PlanningCard'
 
@@ -21,16 +22,20 @@ class PlanningList extends React.Component {
     return connectDropTarget(
       <div style={listStyles}>
 
-        <h4>{phase}
-          { deletePhase ?
-            <a
-              className="u-pull-right"
-              href="#"
-              onClick={deletePhase}>
+        { deletePhase ?
+          <a
+            className="u-pull-right"
+            href="#"
+            onClick={deletePhase}>
 
-              X
-            </a>
-            : null}
+            X
+          </a>
+          : null}
+        <h4>{phase}
+          <span
+            style={{paddingRight: '10px'}}
+            className="u-pull-right">({_.sumBy(features, 'score')})
+          </span>
         </h4>
 
         { features.map(feature =>

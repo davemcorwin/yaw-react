@@ -1,0 +1,31 @@
+.allocating{
+  width: 100%;
+
+  form.form{
+    width: 40rem;
+  }
+}
+
+.timeline{
+  // width: 100%;
+  // margin: 0 auto;
+
+  .phase{
+    display: inline-block;
+    height: 4rem;
+    text-align: center;
+    border: 1px solid $border-color;
+
+    &.w-1{ width: 15rem; }
+    &.w-2{ width: 30rem; }
+    &.w-3{ width: 45rem; }
+    &.w-4{ width: 60rem; }
+  }
+
+  .week{
+    display: inline-block;
+    height: 4rem;
+    width: 15rem;
+    border: 1px solid $border-color;
+  }
+}
