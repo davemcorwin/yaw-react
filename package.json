@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "brunch watch --server",
-    "prod": "brunch build --production"
+    "prod": "brunch build --production",
+    "deploy": "brunch build --production && surge ./public"
   },
   "dependencies": {
     "classnames": "^2.2.5",
